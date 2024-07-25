@@ -18,7 +18,7 @@ def match_ends(words):
     count=0
     for word in words:
         length=len(word)
-        if length>2 and word[0]==word[length-1]:
+        if length>=2 and word[0]==word[-1]:
             count+=1
     return count
 
@@ -33,15 +33,16 @@ def match_ends(words):
 
 def front_x(originalList):
     front_x=[]
+    other=[]
     for word in originalList:
         if word[0]=='x':
             front_x.append(word)
-            originalList.remove(word)
-    sortedList=sorted(originalList)
+        else:
+            other.append(word)
+    sortedList=sorted(other)
     sortedFrontX=sorted(front_x)
-    sortedFrontX.extend(sortedList)
-    print(sortedFrontX)
-    return
+    result=sortedFrontX+(sortedList)
+    return result
 
 
 # C. sort_last
@@ -51,8 +52,7 @@ def front_x(originalList):
 # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 # Hint: use a custom key= function to extract the last element form each tuple.
 
-def sort_last(tuples):
-    tuple=[(1, 7), (1, 3), (3, 4, 5), (2, 2)]
+def sort_last(tuple):
     def last(tuple):
         return tuple[len(tuple)-1]
     return(sorted(tuple,key=last))
@@ -93,3 +93,5 @@ def main():
     test(sort_last([(1, 7), (1, 3), (3, 4, 5), (2, 2)]),
          [(2, 2), (1, 3), (3, 4, 5), (1, 7)])
 
+if __name__ == "__main__":
+    main()
